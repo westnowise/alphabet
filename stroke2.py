@@ -43,11 +43,11 @@ def classify_strokes(strokes, model):
 
 # 예시 모델 생성
 model = StrokeModel()
-model.load_state_dict(torch.load("stroke_model.pth"))
+model = torch.load("stroke_model.pth")
 model.eval()
 
 # 이미지 경로
-image_path = "../img/A.png"
+image_path = "../img/image.png"
 
 # 이미지 전처리 및 획 추출
 binary_image = preprocess_image(image_path)
@@ -110,9 +110,9 @@ for stroke, classification_result in classified_strokes:
     end_point = stroke[1]
     color = (0, 255, 0)  # 초록색
     if classification_result == 2:
-        color = (0, 0, 255)  # 빨간색
+        color = (0, 0, 255)  # red
     elif classification_result == 3:
-        color = (255, 0, 0)  # 파란색
+        color = (255, 0, 0)  # blue
     cv2.line(original_image, start_point, end_point, color, 2)  # 선 그리기
 
 cv2.imshow("Top 3 Strokes", original_image)
